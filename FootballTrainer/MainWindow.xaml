@@ -1,0 +1,177 @@
+<Window x:Class="FootballTrainer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Fußballtrainer Desktop" Height="900" Width="1500" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Background="#0f172a">
+            <StackPanel Margin="20">
+                <TextBlock Text="Fußballtrainer" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,24" />
+                <Button Content="Dashboard" Click="Dashboard_Click" />
+                <Button Content="Mannschaft" Click="Team_Click" />
+                <Button Content="Spieler" Click="Players_Click" />
+                <Button Content="Trainings" Click="Training_Click" />
+                <Button Content="Übungen" Click="Exercises_Click" />
+                <Button Content="Anwesenheiten" Click="Attendance_Click" />
+                <Button Content="Kalender" Click="Calendar_Click" />
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Column="1" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="HeaderTitle" Text="Dashboard" FontSize="30" FontWeight="Bold" Margin="0,0,0,20" />
+
+            <TabControl Grid.Row="1">
+                <TabItem Header="Übersicht">
+                    <Grid Margin="0,10,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <WrapPanel>
+                            <Border Width="220" Height="110" Background="#dbeafe" CornerRadius="12" Margin="0,0,20,20">
+                                <StackPanel Margin="16">
+                                    <TextBlock Text="Mannschaft" FontSize="14" Foreground="#1e3a8a" />
+                                    <TextBlock x:Name="TeamsCountText" Text="0" FontSize="32" FontWeight="Bold" Foreground="#1e3a8a" />
+                                </StackPanel>
+                            </Border>
+                            <Border Width="220" Height="110" Background="#dcfce7" CornerRadius="12" Margin="0,0,20,20">
+                                <StackPanel Margin="16">
+                                    <TextBlock Text="Spieler" FontSize="14" Foreground="#166534" />
+                                    <TextBlock x:Name="PlayersCountText" Text="0" FontSize="32" FontWeight="Bold" Foreground="#166534" />
+                                </StackPanel>
+                            </Border>
+                            <Border Width="220" Height="110" Background="#fef3c7" CornerRadius="12" Margin="0,0,20,20">
+                                <StackPanel Margin="16">
+                                    <TextBlock Text="Trainings" FontSize="14" Foreground="#92400e" />
+                                    <TextBlock x:Name="TrainingsCountText" Text="0" FontSize="32" FontWeight="Bold" Foreground="#92400e" />
+                                </StackPanel>
+                            </Border>
+                        </WrapPanel>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border Background="#f8fafc" BorderBrush="#e2e8f0" BorderThickness="1" CornerRadius="10" Padding="12" Margin="0,0,20,0">
+                                <StackPanel>
+                                    <TextBlock Text="Saisonziele" FontSize="22" FontWeight="Bold" Margin="0,0,0,12" />
+                                    <TextBlock Text="- Spielkultur verbessern" Margin="0,0,0,8" />
+                                    <TextBlock Text="- Pressingorganisation stärken" Margin="0,0,0,8" />
+                                    <TextBlock Text="- Übergangsphase schneller gestalten" Margin="0,0,0,8" />
+                                    <TextBlock Text="- Ballverlust vermeiden in der ersten Linie" Margin="0,0,0,8" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Column="1" Background="#f8fafc" BorderBrush="#e2e8f0" BorderThickness="1" CornerRadius="10" Padding="12">
+                                <StackPanel>
+                                    <TextBlock Text="Nächste Termine" FontSize="22" FontWeight="Bold" Margin="0,0,0,12" />
+                                    <TextBlock Text="- Training: Mittwoch, 18:30 Uhr" Margin="0,0,0,8" />
+                                    <TextBlock Text="- Spiel: Samstag, 15:00 Uhr" Margin="0,0,0,8" />
+                                    <TextBlock Text="- Team-Review: Montag, 19:00 Uhr" Margin="0,0,0,8" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Mannschaft">
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="320" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+                            <TextBlock Text="Neue Mannschaft" FontSize="20" FontWeight="Bold" Margin="0,0,0,12" />
+                            <TextBox x:Name="TeamNameTextBox" Text="U17" />
+                            <TextBox x:Name="AgeGroupTextBox" Text="Altersgruppe" />
+                            <Button Content="Mannschaft speichern" Click="AddTeam_Click" />
+                        </StackPanel>
+
+                        <DataGrid x:Name="TeamsGrid" Grid.Column="1" Margin="20,0,0,0" AutoGenerateColumns="True" CanUserAddRows="False" />
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Spieler">
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="360" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+                            <TextBlock Text="Neuer Spieler" FontSize="20" FontWeight="Bold" Margin="0,0,0,12" />
+                            <TextBox x:Name="PlayerNameTextBox" Text="Max Mustermann" />
+                            <TextBox x:Name="PlayerPositionTextBox" Text="Stürmer" />
+                            <TextBox x:Name="PlayerNumberTextBox" Text="9" />
+                            <Button Content="Spieler speichern" Click="AddPlayer_Click" />
+                        </StackPanel>
+
+                        <DataGrid x:Name="PlayersGrid" Grid.Column="1" Margin="20,0,0,0" AutoGenerateColumns="True" CanUserAddRows="False" />
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Trainings">
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="360" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+                            <TextBlock Text="Neues Training" FontSize="20" FontWeight="Bold" Margin="0,0,0,12" />
+                            <TextBox x:Name="TrainingTitleTextBox" Text="Pressing-Training" />
+                            <TextBox x:Name="TrainingDateTextBox" Text="2026-09-30" />
+                            <TextBox x:Name="TrainingFocusTextBox" Text="Ballgewinn im Mittelfeld" />
+                            <Button Content="Training speichern" Click="AddTraining_Click" />
+                        </StackPanel>
+
+                        <DataGrid x:Name="TrainingsGrid" Grid.Column="1" Margin="20,0,0,0" AutoGenerateColumns="True" CanUserAddRows="False" />
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Übungen">
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="360" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+                            <TextBlock Text="Neue Übung" FontSize="20" FontWeight="Bold" Margin="0,0,0,12" />
+                            <TextBox x:Name="ExerciseNameTextBox" Text="4-gegen-2 Rondo" />
+                            <TextBox x:Name="ExerciseCategoryTextBox" Text="Balltechnick" />
+                            <TextBox x:Name="ExerciseDescriptionTextBox" Text="Schneller Ballwechsel und Raumverteilung" />
+                            <Button Content="Übung speichern" Click="AddExercise_Click" />
+                        </StackPanel>
+
+                        <DataGrid x:Name="ExercisesGrid" Grid.Column="1" Margin="20,0,0,0" AutoGenerateColumns="True" CanUserAddRows="False" />
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Anwesenheiten">
+                    <Grid Margin="10">
+                        <Border Background="#f8fafc" CornerRadius="10" Padding="16">
+                            <StackPanel>
+                                <TextBlock Text="Anwesenheitsverwaltung" FontSize="22" FontWeight="Bold" />
+                                <TextBlock Text="Hier werden später Spielerstatus, Abwesenheiten und Genehmigungen verwaltet." Margin="0,12,0,0" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>
